@@ -132,7 +132,7 @@ GenerateClassCluster=0
 DocumentUniqueId=
 
 [Document6]
-DocumentPath=Project.SchDoc
+DocumentPath=Main.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
 AnnotationIndexControlEnabled=0
@@ -149,7 +149,7 @@ GenerateClassCluster=0
 DocumentUniqueId=JGESNEWV
 
 [Document7]
-DocumentPath=Project input.SchDoc
+DocumentPath=Input_Stage.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
 AnnotationIndexControlEnabled=0
@@ -166,7 +166,7 @@ GenerateClassCluster=0
 DocumentUniqueId=BDYLSRQL
 
 [Document8]
-DocumentPath=Boost.SchDoc
+DocumentPath=Boost_Converter.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
 AnnotationIndexControlEnabled=0
@@ -183,7 +183,7 @@ GenerateClassCluster=0
 DocumentUniqueId=CDDHSEUK
 
 [Document9]
-DocumentPath=Measurements and project output.SchDoc
+DocumentPath=Output_Stage.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
 AnnotationIndexControlEnabled=0
@@ -200,7 +200,7 @@ GenerateClassCluster=0
 DocumentUniqueId=FMSBSYCG
 
 [Document10]
-DocumentPath=Power supply and management.SchDoc
+DocumentPath=Power_Supply.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
 AnnotationIndexControlEnabled=0
@@ -217,7 +217,7 @@ GenerateClassCluster=0
 DocumentUniqueId=UNGZQKEN
 
 [Document11]
-DocumentPath=microcontroller connector.SchDoc
+DocumentPath=MCU.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
 AnnotationIndexControlEnabled=0
@@ -231,7 +231,7 @@ ClassGenCCAutoRoomEnabled=1
 ClassGenNCAutoScope=None
 DItemRevisionGUID=
 GenerateClassCluster=0
-DocumentUniqueId=
+DocumentUniqueId=SEUFQEFX
 
 [Document12]
 DocumentPath=PCB1.PcbDoc
