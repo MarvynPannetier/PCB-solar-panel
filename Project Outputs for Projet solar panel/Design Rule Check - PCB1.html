@@ -1,0 +1,622 @@
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html">
+<style type="text/css">
+		h1, h2, h3, h4, h5, h6 {
+			font-family : segoe ui;
+			color : black;
+			background-color : #EDE7D9;
+			padding: 0.3em;
+		}
+
+		h1 {
+			font-size: 1.2em;
+		}		
+
+		h2 {
+			font-size: 1.2em;
+		}
+
+		body {
+			font-family : segoe ui;
+		}
+
+		td, th {
+			padding: 0.5em;
+			text-align : left;
+			width: 10em;
+		}
+		th {
+			background-color : #EEEEEE;
+
+		}
+		th.column1, td.column1 {
+			text-align: left;
+			width : auto;
+		}
+		table {
+			width : 100%;
+			font-size: 0.9em;
+		}
+
+		.DRC_summary_header {
+			padding-bottom : 0.1em;
+			border : 0px solid black;
+			width: 100%;
+			align: left;
+		}
+
+		.DRC_summary_header_col1,
+		.DRC_summary_header_col2, 
+		.DRC_summary_header_col3 {
+			color : black;
+			font-size:100%;
+			padding : 0em;
+			padding-top : 0.2em;
+			padding-bottom 0.2em;
+			border : 0px solid black;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.DRC_summary_header_col1 {
+			font-weight: bold;
+			width: 8em;
+		}
+
+		.DRC_summary_header_col2 {
+			width: 0.1em;
+		
+		}
+
+		.DRC_summary_header_col3 {
+			width : auto;
+		}
+
+		.header_holder {
+		    Width = 100%;
+		    border = 0px solid green;
+		    padding = 0;
+		}
+
+
+		.front_matter, .front_matter_column1, .front_matter_column2, .front_matter_column3
+		{
+			left : 0;
+			top : 0;
+			padding: 0em;
+			padding-top : 0.1em;
+			border : 0px solid black;
+			width : 100%;
+			vertical-align: top;
+			text-align: left;
+		}
+
+		.front_matter_column1 {
+			width : 8em;
+			font-weight: bold;
+		}
+
+		.front_matter_column2 {
+			width: 0.1em;
+		}
+
+		.front_matter_column3 {
+			width : auto;
+		}
+
+		.total_column1, .total_column {
+			font-weight : bold;
+		}
+		.total_column1 {
+			text-align : left;
+		}
+		.warning, .error {
+			color : red;
+			font-weight : bold;
+		}
+		tr.onmouseout_odd {
+			background-color : #white;
+		}
+		tr.onmouseout_even { 
+			background-color : #FAFAFA;
+		}
+		tr.onmouseover_odd, tr.onmouseover_even { 
+			background-color : #EEEEEE;
+		} 
+		a:link, a:visited, .q a:link,.q a:active,.q {
+			color: #21489e; 
+		}
+		a:link.callback, a:visited.callback { 
+			color: #21489e;
+		}
+		a:link.customize, a:visited.customize {
+			color: #C0C0C0;
+			position: absolute; 
+			right: 10px;
+		}	
+		p.contents_level1 {
+			font-weight : bold;
+			font-size : 110%;
+			margin : 0.5em;
+		}
+		p.contents_level2 {
+			position : relative;
+			left : 20px;
+			margin : 0.5em;
+		}
+	</style><script type="text/javascript">
+		function coordToMils(coord) {
+			var number = coord / 10000;
+			
+			if (number != number.toFixed(3))
+				number = number.toFixed(3);
+
+			return number + 'mil'
+		}
+
+		function coordToMM(coord) {
+			var number = 0.0254 * coord / 10000;
+			
+			if (number != number.toFixed(4))
+				number = number.toFixed(4);
+			
+			return number + 'mm'
+		}
+	
+		function convertCoord(coordNode, units) {
+			for (var i = 0; i < coordNode.childNodes.length; i++) {
+				coordNode.removeChild(coordNode.childNodes[i]);
+			}
+
+			var coord = coordNode.getAttribute('value');
+			if (coord != null) {
+				if (units == 'mm') {
+					textNode = document.createTextNode(coordToMM(coord));
+					coordNode.appendChild(textNode);
+				} else if (units == 'mil') {
+					textNode = document.createTextNode(coordToMils(coord));		
+					coordNode.appendChild(textNode);	
+				}
+			}
+		}
+	
+		function convertUnits(unitNode, units) {
+			for (var i = 0; i < unitNode.childNodes.length; i++) {
+				unitNode.removeChild(unitNode.childNodes[i]);		
+			}
+		
+			textNode = document.createTextNode(units); 
+			unitNode.appendChild(textNode);
+		}
+	
+		function changeUnits(radio_input, units) {
+			if (radio_input.checked) {
+			
+				var elements = document.getElementsByName('coordinate');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertCoord(elements[i], units);
+					}
+				}
+	
+				var elements = document.getElementsByName('units');
+				if (elements) {
+					for (var i = 0; i < elements.length; i++) {
+						convertUnits(elements[i], units);
+					}
+				}
+			}
+		}
+	</script><title>Design Rule Verification Report</title>
+</head>
+<body onload=""><img ALT="Altium" src="
+			file://C:\Users\Public\Documents\Altium\AD21\Templates\AD_logo.png
+		"><h1>Design Rule Verification Report</h1>
+<table class="header_holder">
+<td class="column1">
+<table class="front_matter">
+<tr class="front_matter">
+<td class="front_matter_column1">Date:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">04/12/2021</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">11:34:20</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Elapsed Time:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3">00:00:02</td>
+</tr>
+<tr class="front_matter">
+<td class="front_matter_column1">Filename:</td>
+<td class="front_matter_column2"></td>
+<td class="front_matter_column3"><a href="file:///C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc" class="file"><acronym title="C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc">C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc</acronym></a></td>
+</tr>
+</table>
+</td>
+<td class="column2">
+<table class="DRC_summary_header">
+<tr>
+<td class="DRC_summary_header_col1">Warnings:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3">0</td></tr>
+<tr>
+<td class="DRC_summary_header_col1">Rule Violations:</td>
+<td class="DRC_summary_header_col2"></td>
+<td class="DRC_summary_header_col3" style="color : red">82</td></tr>
+</table>
+</td>
+</table><a name="ID02XFF5K5PNSIKQ24IFUTZNVYDMJMIP2SLCJATCDTB5LMNROXYKKL"><h2>Summary</h2></a><table>
+<tr>
+<th class="column1">Warnings</th>
+<th class="column2">Count</th>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">0</td>
+</tr>
+</table><br><table>
+<tr>
+<th class="column1">Rule Violations</th>
+<th class="column2">Count</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDMXWDZYOWPRTJC0GWBUMNELNNCJ5OOAQLL3MN40JGASJDLZVXLLZG">Clearance Constraint (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID3QKNWYZBZ4THPICKUC4JNSARGF30MOFICYBH0DCXVKBGCUGXHNMF">Short-Circuit Constraint (Allowed=No) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDCGLDFSMBFZSQHNMVABG1D5UBKC54OAJNC1X1H3POGZPRYZ4ZWHKK">Un-Routed Net Constraint ( (All) )</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDNHKSZ1ODZA44GAALCMASDFSXFBM5GY54MHZKSAB342ER53AUHGWC">Modified Polygon (Allow modified: No), (Allow shelved: No)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDWTBAL2K4Y135KENO1E1WBOKZCBXRR3APGDYQ2PE5TJNV3D1X5NP">Width Constraint (Min=0.15mm) (Max=0.254mm) (Preferred=0.254mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID0PJO2BRCRRARPKNNVQ1CAAX4ODLDZYZ0WJW1KPEK5UV1NVZ4AIY">Power Plane Connect Rule(Direct Connect )(Expansion=0.508mm) (Conductor Width=0.254mm) (Air Gap=0.254mm) (Entries=4) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID2V33T3XBIMLEADWS5COPN1AOO2BDZMODYLBPJISAOL2LID1PHKJ">Hole Size Constraint (Min=0.025mm) (Max=2.54mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDXBQCN3F1JYKEFSZMKAT5E2X5UBVKELDYWWU2Q3OCX1LOQ2NL2FWL">Hole To Hole Clearance (Gap=0.254mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDF2HQ1C2PXLOMMG5MIJPZFIGSMNUVBII2MLEFUDJ0U0IMGKQNMG5I">Minimum Solder Mask Sliver (Gap=0.021mm) (All),(All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID5FL2IHTS5YLZIU5RJ34RG3IJCGLA0S4AP1UXSIICAG3VH51EMWPH">Silk To Solder Mask (Clearance=0.1mm) (IsPad),(All)</a></td>
+<td class="column2">3</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDMM1FVSMCTBWOMROCGMBMXER0OG2ZAOAKYLTGG5GWYCVBJE2LSGJ">Silk to Silk (Clearance=0.254mm) (All),(All)</a></td>
+<td class="column2">2</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#ID0XZISG1HQ0MLNYS3K5QODY1S4EQHAGXXOL5M1QOBZQ1YKJ2JKLBF">Net Antennae (Tolerance=0mm) (All)</a></td>
+<td class="column2">0</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#ID5DYEVTBZWOXWHLRXLDV2OYFKZL4JYTVLMGRFBIFLIQ53FWQA0R3F">Room U_Input_Stage (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Input_Stage'))</a></td>
+<td class="column2">10</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDYNQXLPYN1GDGGJN4GQCA3CIHHFSY0T3PHWVAGEOZS5SBI1SEBWLO">Room U_MCU (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_MCU'))</a></td>
+<td class="column2">1</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDWELA3THLZSCAOUCT1VEGFM02PJIT0NPPE4NJVTMYUZJ41CPXXLBB">Room U_Power_Supply (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Power_Supply'))</a></td>
+<td class="column2">17</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDJVSNUN0SWQJJJL03EI3F3W2UWEMI4ZDOAPCCQCEQJ1SBK1KQNICH">Room U_Output_Stage (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Output_Stage'))</a></td>
+<td class="column2">19</td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="#IDFWQYC4NGUINCLLSPOQZQJOHGFGAQ5G1AAEMDZEC5YTLBEE4LKNM">Room U_Boost_Converter (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Boost_Converter'))</a></td>
+<td class="column2">28</td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="#IDOUTZNCJUQO05LO2KQJDY0ZFTXGJVND0EUVMLNBLGJNQG1WDFJBM">Height Constraint (Min=0mm) (Max=25.4mm) (Prefered=12.7mm) (All)</a></td>
+<td class="column2">2</td>
+</tr>
+<tr>
+<td style="font-weight : bold; text-align : right" class="column1">Total</td>
+<td style="font-weight : bold" class="column2">82</td>
+</tr>
+</table><br><a name="ID5FL2IHTS5YLZIU5RJ34RG3IJCGLA0S4AP1UXSIICAG3VH51EMWPH"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk To Solder Mask (Clearance=0.1mm) (IsPad),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3130.195mil|Location2.X=3133.82mil|Location1.Y=4142.558mil|Location2.Y=4146.182mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3130.195mil|Location2.X=3133.82mil|Location1.Y=4142.558mil|Location2.Y=4146.182mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.1mm) Between Pad Q4-2(79.248mm,105.902mm) on Top Layer And Text "Q3" (78.907mm,104.952mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3166.485mil|Location2.X=3170.11mil|Location1.Y=4142.558mil|Location2.Y=4146.182mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3166.485mil|Location2.X=3170.11mil|Location1.Y=4142.558mil|Location2.Y=4146.182mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (Collision &lt; 0.1mm) Between Pad Q4-3(80.518mm,105.902mm) on Top Layer And Text "Q3" (78.907mm,104.952mm) on Top Overlay [Top Overlay] to [Top Solder] clearance [0mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2751.906mil|Location2.X=2758.727mil|Location1.Y=2552.643mil|Location2.Y=2559.881mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2751.906mil|Location2.X=2758.727mil|Location1.Y=2552.643mil|Location2.Y=2559.881mil|Absolute=True">Silk To Solder Mask Clearance Constraint: (0.004mm &lt; 0.1mm) Between Pad R6-1(70.866mm,65.556mm) on Bottom Layer And Text "TP3" (69.849mm,63.373mm) on Bottom Overlay [Bottom Overlay] to [Bottom Solder] clearance [0.004mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDMM1FVSMCTBWOMROCGMBMXER0OG2ZAOAKYLTGG5GWYCVBJE2LSGJ"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Silk to Silk (Clearance=0.254mm) (All),(All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4036.516mil|Location2.X=4050.113mil|Location1.Y=2945.33mil|Location2.Y=2956.58mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=4036.516mil|Location2.X=4050.113mil|Location1.Y=2945.33mil|Location2.Y=2956.58mil|Absolute=True">Silk To Silk Clearance Constraint: (0.229mm &lt; 0.254mm) Between Arc (100.711mm,68.794mm) on Bottom Overlay And Text "C10" (106.298mm,75.184mm) on Bottom Overlay Silk Text to Silk Clearance [0.229mm]</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2560.92mil|Location2.X=2572.17mil|Location1.Y=3600.846mil|Location2.Y=3613.657mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2560.92mil|Location2.X=2572.17mil|Location1.Y=3600.846mil|Location2.Y=3613.657mil|Absolute=True">Silk To Silk Clearance Constraint: (0.12mm &lt; 0.254mm) Between Arc (59.436mm,94.702mm) on Bottom Overlay And Text "R4" (67.64mm,89.992mm) on Bottom Overlay Silk Text to Silk Clearance [0.12mm]</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="ID5DYEVTBZWOXWHLRXLDV2OYFKZL4JYTVLMGRFBIFLIQ53FWQA0R3F"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Room U_Input_Stage (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Input_Stage'))</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2000mil|Location1.Y=0mil|Location2.Y=4299.567mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2000mil|Location1.Y=0mil|Location2.Y=4299.567mil|Absolute=True">Room Definition: Between Room U_Input_Stage (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Input_Stage')) And Small Component P1-MSTBVA2,5/3-G-5,08 (36.939mm,91.837mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2000mil|Location1.Y=0mil|Location2.Y=4040.197mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2000mil|Location1.Y=0mil|Location2.Y=4040.197mil|Absolute=True">Room Definition: Between Room U_Input_Stage (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Input_Stage')) And SMT Small Component C1-10nF (42.545mm,100.457mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2000mil|Location1.Y=0mil|Location2.Y=4040.197mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2000mil|Location1.Y=0mil|Location2.Y=4040.197mil|Absolute=True">Room Definition: Between Room U_Input_Stage (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Input_Stage')) And SMT Small Component C2-100µF (48.641mm,100.457mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2233.543mil|Location1.Y=0mil|Location2.Y=4047.165mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2233.543mil|Location1.Y=0mil|Location2.Y=4047.165mil|Absolute=True">Room Definition: Between Room U_Input_Stage (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Input_Stage')) And SMT Small Component C3-GRM32EC72A106KE05K (55.118mm,100.584mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2800.827mil|Location1.Y=0mil|Location2.Y=3525.197mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2800.827mil|Location1.Y=0mil|Location2.Y=3525.197mil|Absolute=True">Room Definition: Between Room U_Input_Stage (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Input_Stage')) And SMT Small Component C4-220pF (69.977mm,87.376mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2000mil|Location1.Y=0mil|Location2.Y=4699.135mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2000mil|Location1.Y=0mil|Location2.Y=4699.135mil|Absolute=True">Room Definition: Between Room U_Input_Stage (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Input_Stage')) And SMT Small Component D1-PMEG45U10 (43.053mm,114.808mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2195.985mil|Location1.Y=0mil|Location2.Y=4699.135mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2195.985mil|Location1.Y=0mil|Location2.Y=4699.135mil|Absolute=True">Room Definition: Between Room U_Input_Stage (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Input_Stage')) And SMT Small Component D2-PMEG45U10 (52.578mm,114.808mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2565.985mil|Location1.Y=0mil|Location2.Y=4698.976mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2565.985mil|Location1.Y=0mil|Location2.Y=4698.976mil|Absolute=True">Room Definition: Between Room U_Input_Stage (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Input_Stage')) And SMT Small Component D3-PMEG45U10 (61.976mm,114.804mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2966.26mil|Location1.Y=0mil|Location2.Y=3827.558mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2966.26mil|Location1.Y=0mil|Location2.Y=3827.558mil|Absolute=True">Room Definition: Between Room U_Input_Stage (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Input_Stage')) And SMT Small Component R1-100K? (74.168mm,94.845mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3006.26mil|Location1.Y=0mil|Location2.Y=3538.504mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3006.26mil|Location1.Y=0mil|Location2.Y=3538.504mil|Absolute=True">Room Definition: Between Room U_Input_Stage (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Input_Stage')) And SMT Small Component R2-8.2K? (75.184mm,87.503mm) on Top Layer </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDYNQXLPYN1GDGGJN4GQCA3CIHHFSY0T3PHWVAGEOZS5SBI1SEBWLO"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Room U_MCU (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_MCU'))</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3068.937mil|Location1.Y=0mil|Location2.Y=1468.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3068.937mil|Location1.Y=0mil|Location2.Y=1468.937mil|Absolute=True">Room Definition: Between DIP Component P4-Header 12X2 (48.641mm,35.941mm) on Top Layer And Room U_MCU (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_MCU')) </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDWELA3THLZSCAOUCT1VEGFM02PJIT0NPPE4NJVTMYUZJ41CPXXLBB"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Room U_Power_Supply (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Power_Supply'))</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2000mil|Location1.Y=0mil|Location2.Y=2453.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2000mil|Location1.Y=0mil|Location2.Y=2453.937mil|Absolute=True">Room Definition: Between Room U_Power_Supply (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Power_Supply')) And Small Component P2-Header 2 (33.02mm,60.96mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2000mil|Location1.Y=0mil|Location2.Y=1903.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2000mil|Location1.Y=0mil|Location2.Y=1903.937mil|Absolute=True">Room Definition: Between Room U_Power_Supply (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Power_Supply')) And Small Component P3-Header 2 (36.576mm,44.45mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2000mil|Location1.Y=0mil|Location2.Y=2788.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2000mil|Location1.Y=0mil|Location2.Y=2788.937mil|Absolute=True">Room Definition: Between Room U_Power_Supply (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Power_Supply')) And Small Component W1-Jumper (35.814mm,68.834mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2000mil|Location1.Y=0mil|Location2.Y=1578.937mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2000mil|Location1.Y=0mil|Location2.Y=1578.937mil|Absolute=True">Room Definition: Between Room U_Power_Supply (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Power_Supply')) And Small Component W2-Jumper (39.116mm,38.1mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3199.566mil|Location1.Y=0mil|Location2.Y=3172.284mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3199.566mil|Location1.Y=0mil|Location2.Y=3172.284mil|Absolute=True">Room Definition: Between Room U_Power_Supply (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Power_Supply')) And SMT SIP Component IC2-TL2575HV-12IKTTR (72.694mm,74.901mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2848.74mil|Location1.Y=0mil|Location2.Y=2478.544mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2848.74mil|Location1.Y=0mil|Location2.Y=2478.544mil|Absolute=True">Room Definition: Between Room U_Power_Supply (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Power_Supply')) And SMT Small Component C16-EEEFK1E331P (67.183mm,55.88mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2000mil|Location1.Y=0mil|Location2.Y=2510.197mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2000mil|Location1.Y=0mil|Location2.Y=2510.197mil|Absolute=True">Room Definition: Between Room U_Power_Supply (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Power_Supply')) And SMT Small Component C17-C1206C105M5REC7210 (45.466mm,61.595mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2000mil|Location1.Y=0mil|Location2.Y=1715.827mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2000mil|Location1.Y=0mil|Location2.Y=1715.827mil|Absolute=True">Room Definition: Between Room U_Power_Supply (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Power_Supply')) And SMT Small Component C18-CC1206KKX7R0BB104 (47.625mm,42.418mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2197.403mil|Location1.Y=0mil|Location2.Y=2169.291mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2197.403mil|Location1.Y=0mil|Location2.Y=2169.291mil|Absolute=True">Room Definition: Between Room U_Power_Supply (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Power_Supply')) And SMT Small Component IC3-UA78M33CKVURG3 (44.989mm,50.8mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2288.11mil|Location1.Y=0mil|Location2.Y=1717.874mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2288.11mil|Location1.Y=0mil|Location2.Y=1717.874mil|Absolute=True">Room Definition: Between Room U_Power_Supply (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Power_Supply')) And SMT Small Component IC4-MCP100T-315I_TT (56.168mm,41.839mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2458.504mil|Location1.Y=0mil|Location2.Y=1921.26mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2458.504mil|Location1.Y=0mil|Location2.Y=1921.26mil|Absolute=True">Room Definition: Between Room U_Power_Supply (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Power_Supply')) And SMT Small Component J1-MCWR12X000 PTL (60.071mm,47.625mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2328.07mil|Location1.Y=0mil|Location2.Y=2488.188mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2328.07mil|Location1.Y=0mil|Location2.Y=2488.188mil|Absolute=True">Room Definition: Between Room U_Power_Supply (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Power_Supply')) And SMT Small Component L3-22uH (54.758mm,59.563mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2354.666mil|Location1.Y=0mil|Location2.Y=2959.666mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2354.666mil|Location1.Y=0mil|Location2.Y=2959.666mil|Absolute=True">Room Definition: Between Room U_Power_Supply (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Power_Supply')) And SMT Small Component L4-330uH (55.245mm,70.612mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2000mil|Location1.Y=0mil|Location2.Y=2409.37mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2000mil|Location1.Y=0mil|Location2.Y=2409.37mil|Absolute=True">Room Definition: Between Room U_Power_Supply (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Power_Supply')) And SMT Small Component TP4-test point (47.244mm,115.824mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2000mil|Location1.Y=0mil|Location2.Y=1769.37mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2000mil|Location1.Y=0mil|Location2.Y=1769.37mil|Absolute=True">Room Definition: Between Room U_Power_Supply (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Power_Supply')) And SMT Small Component TP5-test point (48.006mm,99.568mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2044.134mil|Location1.Y=0mil|Location2.Y=3163.386mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2044.134mil|Location1.Y=0mil|Location2.Y=3163.386mil|Absolute=True">Room Definition: Between Room U_Power_Supply (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Power_Supply')) And SMT Small Component VS-1-Diode_2 (48.346mm,78.105mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2634.331mil|Location1.Y=0mil|Location2.Y=3762.087mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2634.331mil|Location1.Y=0mil|Location2.Y=3762.087mil|Absolute=True">Room Definition: Between Room U_Power_Supply (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Power_Supply')) And SOIC Component C15-EEV-FK1K101V (57.912mm,87.757mm) on Top Layer </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDJVSNUN0SWQJJJL03EI3F3W2UWEMI4ZDOAPCCQCEQJ1SBK1KQNICH"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Room U_Output_Stage (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Output_Stage'))</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3309.804mil|Location1.Y=0mil|Location2.Y=2766.85mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3309.804mil|Location1.Y=0mil|Location2.Y=2766.85mil|Absolute=True">Room Definition: Between Component IC5-LTC2944CDD#PBF (81.915mm,68.453mm) on Bottom Layer And Room U_Output_Stage (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Output_Stage')) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3282.795mil|Location1.Y=0mil|Location2.Y=4093.819mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3282.795mil|Location1.Y=0mil|Location2.Y=4093.819mil|Absolute=True">Room Definition: Between Component Q3-SI7155DP-T1-GE3 (79.883mm,98.933mm) on Top Layer And Room U_Output_Stage (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Output_Stage')) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3282.795mil|Location1.Y=0mil|Location2.Y=4445.945mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3282.795mil|Location1.Y=0mil|Location2.Y=4445.945mil|Absolute=True">Room Definition: Between Component Q4-SI7155DP-T1-GE3 (79.883mm,108.712mm) on Top Layer And Room U_Output_Stage (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Output_Stage')) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=4089.645mil|Location1.Y=0mil|Location2.Y=4083.307mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=4089.645mil|Location1.Y=0mil|Location2.Y=4083.307mil|Absolute=True">Room Definition: Between Room U_Output_Stage (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Output_Stage')) And Small Component P5-MSTBVA2,5/3-G-5,08 (95.141mm,103.616mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3455.827mil|Location1.Y=0mil|Location2.Y=4017.205mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3455.827mil|Location1.Y=0mil|Location2.Y=4017.205mil|Absolute=True">Room Definition: Between Room U_Output_Stage (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Output_Stage')) And SMT Small Component C19-220pF (86.614mm,99.873mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3486.732mil|Location1.Y=0mil|Location2.Y=4442.362mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3486.732mil|Location1.Y=0mil|Location2.Y=4442.362mil|Absolute=True">Room Definition: Between Room U_Output_Stage (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Output_Stage')) And SMT Small Component D7-1N4148W-G3-08 (86.868mm,110.236mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3579.802mil|Location1.Y=0mil|Location2.Y=3099.882mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3579.802mil|Location1.Y=0mil|Location2.Y=3099.882mil|Absolute=True">Room Definition: Between Room U_Output_Stage (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Output_Stage')) And SMT Small Component Q5-FMMT493ATA (89.027mm,76.962mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3317.558mil|Location1.Y=0mil|Location2.Y=2486.26mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3317.558mil|Location1.Y=0mil|Location2.Y=2486.26mil|Absolute=True">Room Definition: Between Room U_Output_Stage (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Output_Stage')) And SMT Small Component R10-ERJ8BWFR015V (81.891mm,61.976mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3456.26mil|Location1.Y=0mil|Location2.Y=3713.504mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3456.26mil|Location1.Y=0mil|Location2.Y=3713.504mil|Absolute=True">Room Definition: Between Room U_Output_Stage (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Output_Stage')) And SMT Small Component R11-100K? (86.614mm,91.948mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3638.504mil|Location1.Y=0mil|Location2.Y=2811.26mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3638.504mil|Location1.Y=0mil|Location2.Y=2811.26mil|Absolute=True">Room Definition: Between Room U_Output_Stage (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Output_Stage')) And SMT Small Component R12-MCHP06W2F1001T5E (90.043mm,70.231mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3036.26mil|Location1.Y=0mil|Location2.Y=2758.504mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3036.26mil|Location1.Y=0mil|Location2.Y=2758.504mil|Absolute=True">Room Definition: Between Room U_Output_Stage (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Output_Stage')) And SMT Small Component R13-MCHP06W2F1001T5E (75.946mm,67.691mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3637.558mil|Location1.Y=0mil|Location2.Y=2686.26mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3637.558mil|Location1.Y=0mil|Location2.Y=2686.26mil|Absolute=True">Room Definition: Between Room U_Output_Stage (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Output_Stage')) And SMT Small Component R14-MCHP06W2F1001T5E (90.019mm,67.056mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3581.26mil|Location1.Y=0mil|Location2.Y=3498.504mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3581.26mil|Location1.Y=0mil|Location2.Y=3498.504mil|Absolute=True">Room Definition: Between Room U_Output_Stage (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Output_Stage')) And SMT Small Component R15-8.2K? (89.789mm,86.487mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3686.26mil|Location1.Y=0mil|Location2.Y=3268.503mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3686.26mil|Location1.Y=0mil|Location2.Y=3268.503mil|Absolute=True">Room Definition: Between Room U_Output_Stage (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Output_Stage')) And SMT Small Component R16-MCWR12X1003FTL (92.456mm,80.645mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3381.26mil|Location1.Y=0mil|Location2.Y=2933.504mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3381.26mil|Location1.Y=0mil|Location2.Y=2933.504mil|Absolute=True">Room Definition: Between Room U_Output_Stage (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Output_Stage')) And SMT Small Component R17-MCHP06W2F1001T5E (84.709mm,72.136mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3466.26mil|Location1.Y=0mil|Location2.Y=4678.504mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3466.26mil|Location1.Y=0mil|Location2.Y=4678.504mil|Absolute=True">Room Definition: Between Room U_Output_Stage (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Output_Stage')) And SMT Small Component R9-MCWR12X1002FTL (86.868mm,116.459mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3609.37mil|Location1.Y=0mil|Location2.Y=4224.37mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3609.37mil|Location1.Y=0mil|Location2.Y=4224.37mil|Absolute=True">Room Definition: Between Room U_Output_Stage (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Output_Stage')) And SMT Small Component TP6-test point (98.171mm,161.925mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3224.37mil|Location1.Y=0mil|Location2.Y=4684.37mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3224.37mil|Location1.Y=0mil|Location2.Y=4684.37mil|Absolute=True">Room Definition: Between Room U_Output_Stage (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Output_Stage')) And SMT Small Component TP7-test point (88.392mm,173.609mm) on Top Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3006.85mil|Location1.Y=0mil|Location2.Y=4340.787mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3006.85mil|Location1.Y=0mil|Location2.Y=4340.787mil|Absolute=True">Room Definition: Between Room U_Output_Stage (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Output_Stage')) And SMT Small Component Z2-BZX84C12VLFHT116 (74.549mm,108.331mm) on Top Layer </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDFWQYC4NGUINCLLSPOQZQJOHGFGAQ5G1AAEMDZEC5YTLBEE4LKNM"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Room U_Boost_Converter (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Boost_Converter'))</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3066.679mil|Location1.Y=0mil|Location2.Y=3147.525mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3066.679mil|Location1.Y=0mil|Location2.Y=3147.525mil|Absolute=True">Room Definition: Between Component Q2-SIR120DP-T1-RE3 (73.679mm,76.447mm) on Bottom Layer And Room U_Boost_Converter (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Boost_Converter')) </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=4231.732mil|Location1.Y=0mil|Location2.Y=2975.157mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=4231.732mil|Location1.Y=0mil|Location2.Y=2975.157mil|Absolute=True">Room Definition: Between Room U_Boost_Converter (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Boost_Converter')) And Small Component C10-EGXF251ELL680MK30S (100.711mm,66.294mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=4231.732mil|Location1.Y=0mil|Location2.Y=2390.157mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=4231.732mil|Location1.Y=0mil|Location2.Y=2390.157mil|Absolute=True">Room Definition: Between Room U_Boost_Converter (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Boost_Converter')) And Small Component C11-EGXF251ELL680MK30S (100.711mm,56.435mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3726.732mil|Location1.Y=0mil|Location2.Y=2210.157mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3726.732mil|Location1.Y=0mil|Location2.Y=2210.157mil|Absolute=True">Room Definition: Between Room U_Boost_Converter (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Boost_Converter')) And Small Component C12-EGXF251ELL680MK30S (87.884mm,51.863mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2068.15mil|Location1.Y=0mil|Location2.Y=4767.047mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2068.15mil|Location1.Y=0mil|Location2.Y=4767.047mil|Absolute=True">Room Definition: Between Room U_Boost_Converter (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Boost_Converter')) And Small Component C6-870056174001 (48.006mm,114.808mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2428.15mil|Location1.Y=0mil|Location2.Y=4762.047mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2428.15mil|Location1.Y=0mil|Location2.Y=4762.047mil|Absolute=True">Room Definition: Between Room U_Boost_Converter (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Boost_Converter')) And Small Component C7-870056174001 (57.15mm,114.681mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2611.654mil|Location1.Y=0mil|Location2.Y=4000.079mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2611.654mil|Location1.Y=0mil|Location2.Y=4000.079mil|Absolute=True">Room Definition: Between Room U_Boost_Converter (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Boost_Converter')) And Small Component C8-100ZLJ220M12.5X25 (59.436mm,97.202mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3141.732mil|Location1.Y=0mil|Location2.Y=2210.157mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3141.732mil|Location1.Y=0mil|Location2.Y=2210.157mil|Absolute=True">Room Definition: Between Room U_Boost_Converter (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Boost_Converter')) And Small Component C9-EGXF251ELL680MK30S (73.025mm,51.863mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=4214.646mil|Location1.Y=0mil|Location2.Y=4985.709mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=4214.646mil|Location1.Y=0mil|Location2.Y=4985.709mil|Absolute=True">Room Definition: Between Room U_Boost_Converter (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Boost_Converter')) And Small Component L1-SHBC20-1R7A0054V (78.852mm,105.41mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2000mil|Location1.Y=0mil|Location2.Y=3145.827mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2000mil|Location1.Y=0mil|Location2.Y=3145.827mil|Absolute=True">Room Definition: Between Room U_Boost_Converter (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Boost_Converter')) And SMT Small Component C13-100nF (44.069mm,78.74mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2000mil|Location1.Y=0mil|Location2.Y=2880.197mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2000mil|Location1.Y=0mil|Location2.Y=2880.197mil|Absolute=True">Room Definition: Between Room U_Boost_Converter (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Boost_Converter')) And SMT Small Component C14-330nF (46.736mm,70.993mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2000mil|Location1.Y=0mil|Location2.Y=4610.197mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2000mil|Location1.Y=0mil|Location2.Y=4610.197mil|Absolute=True">Room Definition: Between Room U_Boost_Converter (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Boost_Converter')) And SMT Small Component C5-CC1206KKX7R0BB104 (41.021mm,114.935mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3799.37mil|Location1.Y=0mil|Location2.Y=3339.095mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=3799.37mil|Location1.Y=0mil|Location2.Y=3339.095mil|Absolute=True">Room Definition: Between Room U_Boost_Converter (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Boost_Converter')) And SMT Small Component D4-STPS30L60CG-TR (88.519mm,78.613mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2000mil|Location1.Y=0mil|Location2.Y=2296.575mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2000mil|Location1.Y=0mil|Location2.Y=2296.575mil|Absolute=True">Room Definition: Between Room U_Boost_Converter (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Boost_Converter')) And SMT Small Component D5-SMF4L60A-Q (42.926mm,55.939mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2229.134mil|Location1.Y=0mil|Location2.Y=3193.386mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2229.134mil|Location1.Y=0mil|Location2.Y=3193.386mil|Absolute=True">Room Definition: Between Room U_Boost_Converter (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Boost_Converter')) And SMT Small Component D6-VS-10BQ060-M3_5BT (53.045mm,78.867mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2506.456mil|Location1.Y=0mil|Location2.Y=2291.142mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2506.456mil|Location1.Y=0mil|Location2.Y=2291.142mil|Absolute=True">Room Definition: Between Room U_Boost_Converter (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Boost_Converter')) And SMT Small Component L2-SRP1580CA-2R0M (54.864mm,48.895mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2317.756mil|Location1.Y=0mil|Location2.Y=2475.67mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2317.756mil|Location1.Y=0mil|Location2.Y=2475.67mil|Absolute=True">Room Definition: Between Room U_Boost_Converter (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Boost_Converter')) And SMT Small Component Q1-MMBT2222ALT1G (56.896mm,61.087mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2000mil|Location1.Y=0mil|Location2.Y=2768.032mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2000mil|Location1.Y=0mil|Location2.Y=2768.032mil|Absolute=True">Room Definition: Between Room U_Boost_Converter (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Boost_Converter')) And SMT Small Component R3-CRM2512-FX-R100ELF (42.037mm,66.408mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2672.756mil|Location1.Y=0mil|Location2.Y=3512.558mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2672.756mil|Location1.Y=0mil|Location2.Y=3512.558mil|Absolute=True">Room Definition: Between Room U_Boost_Converter (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Boost_Converter')) And SMT Small Component R4-35221R0JT (65.913mm,85.344mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2081.26mil|Location1.Y=0mil|Location2.Y=2523.504mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2081.26mil|Location1.Y=0mil|Location2.Y=2523.504mil|Absolute=True">Room Definition: Between Room U_Boost_Converter (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Boost_Converter')) And SMT Small Component R5-100? (51.689mm,61.722mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2836.26mil|Location1.Y=0mil|Location2.Y=2733.504mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2836.26mil|Location1.Y=0mil|Location2.Y=2733.504mil|Absolute=True">Room Definition: Between Room U_Boost_Converter (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Boost_Converter')) And SMT Small Component R6-MCWR12X4702FTL (70.866mm,67.056mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2601.26mil|Location1.Y=0mil|Location2.Y=2867.558mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2601.26mil|Location1.Y=0mil|Location2.Y=2867.558mil|Absolute=True">Room Definition: Between Room U_Boost_Converter (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Boost_Converter')) And SMT Small Component R7-MCWR12W8R20FTL (64.897mm,70.461mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2000mil|Location1.Y=0mil|Location2.Y=2598.504mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2000mil|Location1.Y=0mil|Location2.Y=2598.504mil|Absolute=True">Room Definition: Between Room U_Boost_Converter (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Boost_Converter')) And SMT Small Component R8-1K? (47.371mm,63.627mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2000mil|Location1.Y=0mil|Location2.Y=4459.37mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2000mil|Location1.Y=0mil|Location2.Y=4459.37mil|Absolute=True">Room Definition: Between Room U_Boost_Converter (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Boost_Converter')) And SMT Small Component TP1-test point (27.686mm,167.894mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2000mil|Location1.Y=0mil|Location2.Y=2774.37mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2000mil|Location1.Y=0mil|Location2.Y=2774.37mil|Absolute=True">Room Definition: Between Room U_Boost_Converter (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Boost_Converter')) And SMT Small Component TP2-test point (27.813mm,125.095mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2599.37mil|Location1.Y=0mil|Location2.Y=2484.37mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2599.37mil|Location1.Y=0mil|Location2.Y=2484.37mil|Absolute=True">Room Definition: Between Room U_Boost_Converter (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Boost_Converter')) And SMT Small Component TP3-test point (57.023mm,117.729mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2000mil|Location1.Y=0mil|Location2.Y=2351.26mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2000mil|Location1.Y=0mil|Location2.Y=2351.26mil|Absolute=True">Room Definition: Between Room U_Boost_Converter (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Boost_Converter')) And SMT Small Component Z1-MMSZ5263BT1G (38.481mm,57.122mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2352.638mil|Location1.Y=0mil|Location2.Y=2884.252mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=0mil|Location2.X=2352.638mil|Location1.Y=0mil|Location2.Y=2884.252mil|Absolute=True">Room Definition: Between Room U_Boost_Converter (Bounding Region = (0mm, 0mm, 50.8mm, 25.4mm) (InComponentClass('U_Boost_Converter')) And SOIC Component IC1-IR7184STRPBF (56.007mm,70.485mm) on Bottom Layer </acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br><a name="IDOUTZNCJUQO05LO2KQJDY0ZFTXGJVND0EUVMLNBLGJNQG1WDFJBM"><table>
+<tr>
+<th style="text-align : left" colspan="1" class="rule">Height Constraint (Min=0mm) (Max=25.4mm) (Prefered=12.7mm) (All)</th>
+</tr>
+<tr class="onmouseout_odd" onmouseover="className = 'onmouseover_odd'" onmouseout="className = 'onmouseout_odd'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2339mil|Location2.X=2341mil|Location1.Y=3825.85mil|Location2.Y=3827.85mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=2339mil|Location2.X=2341mil|Location1.Y=3825.85mil|Location2.Y=3827.85mil|Absolute=True">Height Constraint: Small Component C8-100ZLJ220M12.5X25 (59.436mm,97.202mm) on Bottom Layer Actual Height = 27mm</acronym></a><br></td>
+</tr>
+<tr class="onmouseout_even" onmouseover="className = 'onmouseover_even'" onmouseout="className = 'onmouseout_even'">
+<td class="column1"><a href="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3103.409mil|Location2.X=3105.409mil|Location1.Y=4149mil|Location2.Y=4151mil|Absolute=True" class="callback"><acronym title="dxpprocess://PCB:Zoom?document=C:\Users\panne\bureau\projet interdisciplinaire\Projet solar panel\PCB1.PcbDoc;viewname=PCBEditor;Action=AREA_DYNAMICZOOM|Location1.X=3103.409mil|Location2.X=3105.409mil|Location1.Y=4149mil|Location2.Y=4151mil|Absolute=True">Height Constraint: Small Component L1-SHBC20-1R7A0054V (78.852mm,105.41mm) on Bottom Layer Actual Height = 41.2mm</acronym></a><br></td>
+</tr>
+</table></a><hr color="#EEEEEE"><a href="#top" style="font-size: 0.9em">Back to top</a><br><br></body>
+</html>
