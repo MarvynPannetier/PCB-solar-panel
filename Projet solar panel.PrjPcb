@@ -31,7 +31,7 @@ ReportSuppressedErrorsInMessages=0
 FSMCodingStyle=eFMSDropDownList_OneProcess
 FSMEncodingStyle=eFMSDropDownList_OneHot
 IsProjectConflictPreventionWarningsEnabled=0
-OutputPath=Project Outputs for Projet solar panel
+OutputPath=
 LogFolderPath=
 ManagedProjectGUID=F3B56239-FF5E-4648-9857-FECE06FC9611
 VaultGUID=B32A8297-DD61-4DD2-990E-3F6B515B2065
@@ -478,7 +478,7 @@ SCH_HasExpandLogicalToPhysicalSheets=-1
 SaveSettingsToOutJob=-1
 
 [Generic_EDE]
-OutputDir=Project Outputs for Projet solar panel
+OutputDir=
 
 [OutputGroup1]
 Name=Netlist Outputs
